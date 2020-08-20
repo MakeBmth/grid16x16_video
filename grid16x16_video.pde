@@ -1,12 +1,11 @@
 import processing.video.*;
 
-String filename = "d:/Video/bighero6.mp4";
+String filename = "d:/Video/your_video_here.mp4";
 
-float zoom = 2;
+int border = 140; //We can use this to mess with the aspect ratio of the video as the grid is currently 1:1
 
 OPC opc;
 Movie movie;
-//PGraphics[] pyramid;
 
 void setup()
 {
@@ -16,9 +15,7 @@ void setup()
   // Connect to the local instance of fcserver. You can change this line to connect to another computer's fcserver
   opc = new OPC(this, "127.0.0.1", 7890);
 
-  println(width /16);
-  println(height/16);
-
+  // Define where the grids are etc
   opc.ledGrid8x8(0 * 64, width * 1/4, height * 1/4, height/16, 0, true);
   opc.ledGrid8x8(1 * 64, width * 3/4, height * 1/4, height/16, 0, true);
   opc.ledGrid8x8(2 * 64, width * 1/4, height * 3/4, height/16, 0, true);
@@ -38,8 +35,6 @@ void setup()
 void keyPressed() {
   if (key == 'd') opc.setDithering(false);
   if (key == ' ') movie.pause(); 
-  if (key == ']') zoom *= 1.1;
-  if (key == '[') zoom *= 0.9;
 }
 
 void keyReleased() {
@@ -54,8 +49,6 @@ void movieEvent(Movie m)
 
 void draw()
 {
-  // Scale to width, center height
-  background(0);
-  int border = 120;
-  image(movie, 0, border, width, height-(2*border));
+  background(0); // Set background to show black borders
+  image(movie, 0, border, width, height-(2*border));  // Draw a frame of video
 }
