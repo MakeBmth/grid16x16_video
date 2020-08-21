@@ -1,8 +1,10 @@
 import processing.video.*;
 
-String filename = "d:/Video/your_video_here.mp4";
+String filename = "/path/to/your_video.mp4";
 
-int border = 140; //We can use this to mess with the aspect ratio of the video as the grid is currently 1:1
+//We can use this to mess with the aspect ratio of the video as the grid is currently 1:1
+int verticalBorder = 0;  //Bars at the sides of the display
+int horizontalBorder = 0;  //Bars at the top and bottom of display
 
 OPC opc;
 Movie movie;
@@ -50,5 +52,5 @@ void movieEvent(Movie m)
 void draw()
 {
   background(0); // Set background to show black borders
-  image(movie, 0, border, width, height-(2*border));  // Draw a frame of video
+  image(movie, verticalBorder, horizontalBorder, width-(2*verticalBorder), height-(2*horizontalBorder));  // Draw a frame of video
 }
